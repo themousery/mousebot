@@ -1,2 +1,5 @@
 # mousebot
-a general-purpose discord bot for mousetopia
+
+mousebot is a bot that does a wide range of repetetive tasks that themousery doesn't want to do
+
+*under construction...*
