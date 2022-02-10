@@ -1,28 +1,11 @@
-import discord
-from discord.ext import commands
-import config
-import json
-
-bot = commands.Bot(command_prefix="m$")
-
-# revoke watts pass
-@bot.command(pass_context=True)
-@commands.has_permissions(manage_roles=True)
-async def wattspass(ctx, user: discord.Member):
-    watts_pass = discord.utils.get(ctx.guild.roles, name="watts-pass")
-    await user.remove_roles(watts_pass)
-    await ctx.send("revoked watts pass from {0.name}".format(user))
-
+import discord, config
+bot = discord.Client()
 @bot.event
 async def on_ready():
-    print("logged in as {0.user}".format(bot))
-
-# example for responding to messages
+    print('logged in as {0.user}'.format(bot))
 @bot.event
-async def on_message(message):
-    # skip self
-    if message.author == client.user: return
-    # respond with
-
+async def on_raw_reaction_add(reaction):
+    if reaction.channel_id == 938541973969723463 and reaction.emoji.name == '✅' and not reaction.member.bot:
+        await reaction.member.add_roles(bot.get_guild(931758960233574420).get_role(938530726092087367))
 if __name__ == '__main__':
     bot.run(config.discord)
